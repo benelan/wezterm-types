@@ -7,7 +7,7 @@
 ---@class Wezterm :ExecDomain
 ---@field GLOBAL table<string, ANY>
 ---@field action Action
----@field action_callback fun(win: Window, pane: Pane, ...: any): (nil | false)
+---@field action_callback fun(callback: ActionCallback): Action
 ---@field add_to_config_reload_watch_list fun(path: string): nil Adds path to the list of files that are watched for config changes. If `automatically_reload_config` is enabled, then the config will be reloaded when any of the files that have been added to the watch list have changed.
 ---@field background_child_process fun(args: string[]): nil Accepts an argument list; it will attempt to spawn that command in the background.
 ---@field battery_info fun(): BatteryInfo[] Returns battery information for each of the installed batteries on the system. This is useful for example to assemble status information for the status bar.
@@ -44,7 +44,7 @@
 ---@field pad_right fun(string: string, min_width: integer): string Returns a copy of string that is at least min_width columns (as measured by wezterm.column_width).
 ---@field permute_any_or_no_mods any #TODO
 ---@field plugin WeztermPlugin
----@field read_dir fun(path: string): string Returns an array containing the absolute file names of the directory specified. Due to limitations in the lua bindings, all of the paths must be able to be represented as UTF-8 or this function will generate an error.
+---@field read_dir fun(path: string): string[] Returns an array containing the absolute file names of the directory specified. Due to limitations in the lua bindings, all of the paths must be able to be represented as UTF-8 or this function will generate an error.
 ---@field reload_configuration fun(): nil Immediately causes the configuration to be reloaded and re-applied.
 ---@field run_child_process fun(args: string[]): { success: boolean, stdout: string, stderr: string } Will attempt to spawn that command and will return a tuple consisting of the boolean success of the invocation, the stdout data and the stderr data.
 ---@field running_under_wsl fun(): boolean Returns a boolean indicating whether we believe that we are running in a Windows Services for Linux (WSL) container.
@@ -72,7 +72,3 @@ Wezterm.permute_any_mods = function(table) end
 ---@param num_colors number
 ---@return Color[]
 Wezterm.gradient_colors = function(gradient, num_colors) end
-
----@param callback ActionCallback
----@return Action
-Wezterm.action_callback = function(callback) end
