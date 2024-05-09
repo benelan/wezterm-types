@@ -1,5 +1,5 @@
 ---@class NerdFont
-local nerdfonts  = {}
+local nerdfonts = {}
 nerdfonts.cod_account = ""
 nerdfonts.cod_activate_breakpoints = ""
 nerdfonts.cod_add = ""
@@ -407,6 +407,7 @@ nerdfonts.custom_go = ""
 nerdfonts.custom_home = ""
 nerdfonts.custom_kotlin = ""
 nerdfonts.custom_msdos = ""
+nerdfonts.custom_neovim = ""
 nerdfonts.custom_orgmode = ""
 nerdfonts.custom_play_arrow = ""
 nerdfonts.custom_purescript = ""
@@ -1485,6 +1486,7 @@ nerdfonts.linux_linuxmint_inverse = ""
 nerdfonts.linux_mageia = ""
 nerdfonts.linux_mandriva = ""
 nerdfonts.linux_manjaro = ""
+nerdfonts.linux_neovim = ""
 nerdfonts.linux_nixos = ""
 nerdfonts.linux_openbsd = ""
 nerdfonts.linux_opensuse = ""

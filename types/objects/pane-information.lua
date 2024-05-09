@@ -1,0 +1,17 @@
+---@meta
+
+---@class PaneInformation
+---@field public pane_id number
+---@field public pane_index number
+---@field public is_active boolean
+---@field public is_zoomed boolean
+---@field public left number
+---@field public top number
+---@field public width number
+---@field public height number
+---@field public pixel_width number
+---@field public pixel_height number
+---@field public title string
+---@field public user_vars table<string, string>
+---@field public foreground_process_name string|nil
+---@field public current_working_dir Url

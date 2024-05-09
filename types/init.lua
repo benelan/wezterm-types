@@ -101,6 +101,8 @@
 
 ---@alias Dimension Points | Pixels | Percent | Cells
 
+---@alias Domain {DomainName:string}
+
 ---@class TabBarColor
 -- The color of the background area for the tab
 ---@field bg_color string
@@ -379,7 +381,7 @@ local FontAttributes = {
 ---@alias CallbackWindowPane fun(window: Window, pane: Pane)
 ---@alias EventAugmentCommandPalette fun(event: "augment-command-palette", callback: fun(window: Window, pane: Window): AugmentCommandPaletteReturn): nil This event is emitted when the Command Palette is shown. It's purpose is to enable you to add additional entries to the list of commands shown in the palette. This hook is synchronous; calling asynchronous functions will not succeed.
 ---@alias EventBell fun(event: "augment-command-palette", callback: CallbackWindowPane) The bell event is emitted when the ASCII BEL sequence is emitted to a pane in the window. Defining an event handler doesn't alter wezterm's handling of the bell; the event supplements it and allows you to take additional action over the configured behavior.
----@alias EventFormatTabTitle fun(event: "format-tab-title", callback: fun(tab: MuxTabObj, tabs: MuxTabObj[], panes: Pane[], config: Config, hover: boolean, max_width: number): string) TODO
+---@alias EventFormatTabTitle fun(event: "format-tab-title", callback: fun(tab: TabInformation, tabs: TabInformation[], panes: PaneInformation[], config: Config, hover: boolean, max_width: number): string | FormatItem[])
 ---@alias EventFormatWindowTitle fun(event: "format-window-title", callback: fun(window: Window, pane: Pane, tabs: MuxTabObj[], panes: Pane[], config: Config)) TODO
 ---@alias EventNewTabButtonClick fun(event: "new-tab-button-click", callback: fun(window: Window, pane: Pane, button: "Left" | "Middle" | "Right", default_action: KeyAssignment): nil) TODO
 ---@alias EventOpenUri fun(event: "open-uri", callback: fun(window: Window, pane: Pane, uri: string): nil) TODO
@@ -431,6 +433,7 @@ local FontAttributes = {
 ---@alias CopyMode 'AcceptPattern' | 'ClearPattern' | 'ClearSelectionMode' | 'Close' | 'CycleMatchType' | 'EditPattern' | 'MoveBackwardSemanticZone' | { MoveBackwardSemanticZoneOfType: SemanticZoneType } | 'MoveBackwardWord' | 'MoveDown' | 'MoveForwardSemanticZone' | { MoveForwardSemanticZoneOfType: SemanticZoneType } | 'MoveForwardWord' | 'MoveForwardWordEnd' | 'MoveLeft' | 'MoveRight' | 'MoveToEndOfLineContent' | 'MoveToScrollbackBottom' | 'MoveToScrollbackTop' | 'MoveToSelectionOtherEnd' | 'MoveToSelectionOtherEndHoriz' | 'MoveToStartOfLine' | 'MoveToStartOfLineContent' | 'MoveToStartOfNextLine' | 'MoveToViewportBottom' | 'MoveToViewportMiddle' | 'MoveToViewportTop' | 'MoveUp' | 'NextMatch' | 'NextMatchPage' | 'PriorMatch' | 'PriorMatchPage' | { SetSelectionMode: SelectionMode | 'SemanticZone' }
 ---@alias CursorStyle 'BlinkingBlock' | 'SteadyBlock' | 'BlinkingUnderline' | 'SteadyUnderline' | 'BlinkingBar' | 'SteadyBar'
 ---@alias Direction 'Left' | 'Right' | 'Up' | 'Down' | 'Next' | 'Prev'
+---@alias AbsoluteDirection 'Left' | 'Right' | 'Up' | 'Down'
 ---@alias EasingFunction 'Linear' | 'Ease' | 'EaseIn' | 'EaseInOut' | 'EaseOut' | { CubicBezier: number[] } | 'Constant'
 ---@alias FreetypeLoadTarget 'Normal' | 'Light' | 'Mono' | 'HorizontalLcd'
 ---@alias SelectionMode 'Cell' | 'Word' | 'Line' | 'Block'
@@ -438,6 +441,7 @@ local FontAttributes = {
 ---@alias Stretch 'UltraCondensed' | 'ExtraCondensed' | 'Condensed' | 'SemiCondensed' | 'Normal' | 'SemiExpanded' | 'Expanded' | 'ExtraExpanded' | 'UltraExpanded'
 ---@alias Style 'Normal' | 'Italic' | 'Oblique'
 ---@alias Weight 'Thin' | 'ExtraLight' | 'Light' | 'DemiLight' | 'Book' | 'Regular' | 'Medium' | 'DemiBold' | 'Bold' | 'ExtraBold' | 'Black' | 'ExtraBlack'
+---@alias Size {Cells:number}|{Percent:number}
 
 ---@class ScreenInformation
 ---@field name string

@@ -1,8 +1,17 @@
 ---@meta
 
+---@class PaneSplitParams
+---@field public args table<string>
+---@field public cwd string
+---@field public set_environment_variables table<string, string>
+---@field public domain string|table<string, string>
+---@field public direction "Right"|"Left"|"Top"|"Bottom"
+---@field public top_level boolean
+---@field public size number
+
 ---@class Pane
 ---@field activate fun(self: Pane): nil Activates (focuses) the pane and its containing tab.
----@field get_current_working_dir fun(self: Pane): string Returns the current working directory of the pane, if known. The current directory can be specified by an application sending OSC 7.
+---@field get_current_working_dir fun(self: Pane): Url Returns the current working directory of the pane, if known. The current directory can be specified by an application sending OSC 7.
 ---@field get_cursor_position fun(self: Pane): StableCursorPosition Returns a lua representation of the StableCursorPosition struct that identifies the cursor position, visibility and shape.
 ---@field get_dimensions fun(self: Pane): RenderableDimensions Returns a lua representation of the RenderableDimensions struct that identifies the dimensions and position of the viewport as well as the scrollback for the pane.
 ---@field get_domain_name fun(self: Pane): string Returns the name of the domain with which the pane is associated.
@@ -28,6 +37,6 @@
 ---@field paste fun(self: Pane, text: string): nil Sends the supplied text string to the input of the pane as if it were pasted from the clipboard, except that the clipboard is not involved. If the terminal attached to the pane is set to bracketed paste mode then the text will be sent as a bracketed paste. Otherwise the string will be streamed into the input in chunks of approximately 1KB each.
 ---@field send_paste fun(self: Pane, text: string): nil Sends text to the pane as though it was pasted. If bracketed paste mode is enabled then the text will be sent as a bracketed paste. Otherwise, it will be sent as-is.
 ---@field send_text fun(self: Pane, text: string): nil Sends text to the pane as-is.
----@field split fun(self: Pane): Pane TODO
+---@field split fun(self: Pane, params: PaneSplitParams): Pane Splits pane and spawns a program into the split, returning the Pane object associated with it
 ---@field tab fun(self: Pane): MuxTabObj? the MuxTab that contains this pane. Note that this method can return nil when pane is a GUI-managed overlay pane (such as the debug overlay), because those panes are not managed by the mux layer.
 ---@field window fun(self: Pane): MuxWindow Returns the MuxWindow that contains the tab that contains this pane.

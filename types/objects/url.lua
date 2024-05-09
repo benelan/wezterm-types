@@ -1,0 +1,11 @@
+---@meta
+
+---@class Url
+---@field public scheme "file" | "https"
+---@field public file_path string
+---@field public username string|nil
+---@field public password string|nil
+---@field public host string
+---@field public path string
+---@field public fragment string
+---@field public query string
