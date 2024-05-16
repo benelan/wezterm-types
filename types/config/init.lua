@@ -2,10 +2,13 @@
 
 ---@class Config
 ---@field font FontAttributes The baseline font to use
+---@field font_size f64
+---@field allow_square_glyphs_to_overflow_width "Allow" | "Never" | "WhenFollowedBySpace"
 ---@field dpi_by_screen { [string]: f64 }
 ---@field colors Palette The color palette
 ---@field switch_to_last_active_tab_when_closing_tab bool
 ---@field window_frame WindowFrameConfig
+---@field window_decorations WindowDecorations
 ---@field char_select_font_size f64
 ---@field char_select_fg_color RgbaColor
 ---@field char_select_bg_color RgbaColor
@@ -441,6 +444,17 @@ local WeztermConfig = {
 	-- The brightening doesn't apply to text that is the default color.
 	-- can also use true or false for backwards compatibility
 	bold_brightens_ansi_colors = "BrightAndBold",
+
+	---@type AudibleBell
+	----When the BEL ascii sequence is sent to a pane, the bell is "rung" in
+	---that pane. You may choose to configure the audible_bell option to change
+	---the sound that wezterm makes when the bell rings.
+	audible_bell = "SystemBeep",
+
+	---@type WindowCloseConfirmation
+	---Whether to display a confirmation prompt when the window is closed by the
+	---windowing environment, either because the user closed it with the window
+	---decorations, or instructed their window manager to close it.
 }
 
 -- TODO: finish less commonly used conig options (maybe set the defaults, might be too much time)

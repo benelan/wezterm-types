@@ -41,13 +41,14 @@
 ---@alias CompleteSelectionOrOpenLinkAtMouseCursorParams CopyToTarget
 ---@alias CopyParams CopyToTarget
 ---@alias CopyToParams CopyToTarget
+---@alias CopyModeParams CopyModeAssignment
 ---@alias DetachDomainParams {DomainName: string}
 ---@alias EmitEventParams string
 ---@alias ExtendSelectionToMouseCursorParams "Cell" | "Word" | "Line"
 ---@alias InputSelectorParams {title:string, choices:Choice[], action:Action, fuzzy:boolean, alphabet:string, description:string, fuzzy_description:string}
 ---@alias MoveTabParams number
 ---@alias MoveTabRelativeParams number
----@alias MultipleParams KeyAssignment[]
+---@alias MultipleParams KeyAssignmentAction[]
 ---@alias PaneSelectParams {mode:PaneSelectMode, alphabet:string, show_pane_ids:boolean}
 ---@alias PasteFromParams "Clipboard" | "PrimarySelection"
 ---@alias PromptInputLineParams {description:string, action:Action}
@@ -56,7 +57,7 @@
 ---@alias ScrollByLineParams number
 ---@alias ScrollByPageParams number
 ---@alias ScrollToPromptParams number
----@alias SearchParams {Regex:string} | {CaseSensitiveString:string} | {CaseInSensitiveString:string}
+---@alias SearchParams {Regex:string} | {CaseSensitiveString:string} | {CaseInSensitiveString:string} | "CurrentSelectionOrEmptyString"
 ---@alias SelectTextAtMouseCursorParams "Cell" | "Word" | "Line" | "SemanticZone"
 ---@alias SendKeyParams {key: string, mods: string}
 ---@alias SendStringParams string
@@ -71,7 +72,7 @@
 ---@alias SwitchToWorkspaceParams {name:string, spawn: SpawnCommand}
 ---@alias SwitchWorkspaceRelativeParams number
 
----@alias KeyAssignmentAction KeyAssignmentNoParams |  {ActivatePaneByIndex: ActivatePaneByIndexParams} | {ActivatePaneDirection: ActivatePaneDirectionParams} | {ActivateTab: ActivateTabParams} | {ActivateTabRelative: ActivateTabRelativeParams} | {ActivateTabRelativeNoWrap: ActivateTabRelativeNoWrapParams} | {ActivateWindow: ActivateWindowParams} | {ActivateWindowRelative: ActivateWindowRelativeParams} | {ActivateWindowRelativeNoWrap: ActivateWindowRelativeNoWrapParams} | {AdjustPaneSize: AdjustPaneSizeParams} | {AttachDomain: AttachDomainParams} | {CharSelect: CharSelectParams} | {ClearScrollback: ClearScrollbackParams} |  {CloseCurrentPane: CloseCurrentPaneParams} | {CloseCurrentTab: CloseCurrentTabParams} | {CompleteSelection: CompleteSelectionParams} | {CompleteSelectionOrOpenLinkAtMouseCursor: CompleteSelectionOrOpenLinkAtMouseCursorParams} | {Copy: CopyParams} | {CopyTo: CopyToParams} | {DetachDomain: DetachDomainParams} | {EmitEvent: EmitEventParams} | {ExtendSelectionToMouseCursor: ExtendSelectionToMouseCursorParams} | {MoveTab: MoveTabParams} | {MoveTabRelative: MoveTabRelativeParams} | {Multiple: MultipleParams} | {PaneSelect: PaneSelectParams} | {PasteFrom: PasteFromParams} | {PromptInputLine: PromptInputLineParams} | {QuickSelectArgs: QuickSelectArgsParams} | {RotatePanes: RotatePanesParams} | {ScrollByLine: ScrollByLineParams} | {ScrollByPage: ScrollByPageParams} | {ScrollTofrompt: ScrollToPromptParams} | {Search: SearchParams} | {SelectTextAtMouseCursor: SelectTextAtMouseCursorParams} | {SendKey: SendKeyParams} | {SendString: SendStringParams} | {SetWindowLevel: SetWindowLevelParams} | {ShowLauncherArgs: ShowLauncherArgsParams} | {SpawnCommandInNewTab: SpawnCommandInNewTabParams} | {SpawnCommandInNewWindow: SpawnCommandInNewWindowParams} | {SpawnTab: SpawnTabParams} | {SplitHorizontal: SplitHorizontalParams} | {SplitPane: SplitPaneParams} | {SplitVertical: SplitVerticalParams} | {StartWindowDrag: StartWindowDragParams} | {SwitchToWorkspace: SwitchToWorkspaceParams} | {SwitchWorkspaceRelative: SwitchWorkspaceRelativeParams} | {ToggleFullScreen: ToggleFullScreenParams} | {TogglePaneZoomState: TogglePaneZoomStateParams} | {InputSelector: InputSelectorParams}
+---@alias KeyAssignmentAction KeyAssignmentNoParams |  {ActivatePaneByIndex: ActivatePaneByIndexParams} | {ActivatePaneDirection: ActivatePaneDirectionParams} | {ActivateTab: ActivateTabParams} | {ActivateTabRelative: ActivateTabRelativeParams} | {ActivateTabRelativeNoWrap: ActivateTabRelativeNoWrapParams} | {ActivateWindow: ActivateWindowParams} | {ActivateWindowRelative: ActivateWindowRelativeParams} | {ActivateWindowRelativeNoWrap: ActivateWindowRelativeNoWrapParams} | {AdjustPaneSize: AdjustPaneSizeParams} | {AttachDomain: AttachDomainParams} | {CharSelect: CharSelectParams} | {ClearScrollback: ClearScrollbackParams} |  {CloseCurrentPane: CloseCurrentPaneParams} | {CloseCurrentTab: CloseCurrentTabParams} | {CompleteSelection: CompleteSelectionParams} | {CompleteSelectionOrOpenLinkAtMouseCursor: CompleteSelectionOrOpenLinkAtMouseCursorParams} | {Copy: CopyParams} | {CopyTo: CopyToParams} | {CopyMode: CopyModeParams} | {DetachDomain: DetachDomainParams} | {EmitEvent: EmitEventParams} | {ExtendSelectionToMouseCursor: ExtendSelectionToMouseCursorParams} | {MoveTab: MoveTabParams} | {MoveTabRelative: MoveTabRelativeParams} | {Multiple: MultipleParams} | {PaneSelect: PaneSelectParams} | {PasteFrom: PasteFromParams} | {PromptInputLine: PromptInputLineParams} | {QuickSelectArgs: QuickSelectArgsParams} | {RotatePanes: RotatePanesParams} | {ScrollByLine: ScrollByLineParams} | {ScrollByPage: ScrollByPageParams} | {ScrollTofrompt: ScrollToPromptParams} | {Search: SearchParams} | {SelectTextAtMouseCursor: SelectTextAtMouseCursorParams} | {SendKey: SendKeyParams} | {SendString: SendStringParams} | {SetWindowLevel: SetWindowLevelParams} | {ShowLauncherArgs: ShowLauncherArgsParams} | {SpawnCommandInNewTab: SpawnCommandInNewTabParams} | {SpawnCommandInNewWindow: SpawnCommandInNewWindowParams} | {SpawnTab: SpawnTabParams} | {SplitHorizontal: SplitHorizontalParams} | {SplitPane: SplitPaneParams} | {SplitVertical: SplitVerticalParams} | {StartWindowDrag: StartWindowDragParams} | {SwitchToWorkspace: SwitchToWorkspaceParams} | {SwitchWorkspaceRelative: SwitchWorkspaceRelativeParams} | {ToggleFullScreen: ToggleFullScreenParams} | {TogglePaneZoomState: TogglePaneZoomStateParams} | {InputSelector: InputSelectorParams}
 
 ---@class Action can also be called as function like older versions of wezterm did
 local Action = {}
@@ -161,6 +162,10 @@ Action.Copy = function(param) end
 ---@param param CopyToParams
 ---@return {CopyTo: CopyToParams}
 Action.CopyTo = function(param) end
+
+---@param param CopyModeParams
+---@return {CopyMode: CopyModeParams}
+Action.CopyMode = function(param) end
 
 -- Decreases the font size of the current window by 10%
 Action.DecreaseFontSize = "DecreaseFontSize"

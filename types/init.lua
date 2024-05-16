@@ -37,6 +37,14 @@
 ---| "RGB" default
 ---| "BGR"
 
+---@alias AudibleBell
+---| "Disabled"
+---| "SystemBeep"
+
+---@alias WindowCloseConfirmation
+---| "NeverPrompt"
+---| "AlwaysPrompt"
+
 ---@alias f32 number
 
 ---@alias f64 number
