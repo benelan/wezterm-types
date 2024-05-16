@@ -16,7 +16,7 @@
 ---@field label string
 ---@field id string
 
----@alias ShowLauncherFlags 'FUZZY' | 'TABS' | 'LAUNCH_MENU_ITEMS' | 'DOMAINS' | 'KEY_ASSIGNMENTS' | 'WORKSPACES' | 'COMMANDS'
+---@alias ShowLauncherFlags 'FUZZY' | 'TABS' | 'LAUNCH_MENU_ITEMS' | 'DOMAINS' | 'KEY_ASSIGNMENTS' | 'WORKSPACES' | 'COMMANDS' | string
 ---
 ---@alias PaneSelectMode "Activate" | "SwapWithActive" | "MoveToNewTab" | "MoveToNewWindow" | "SwapWithActiveKeepFocus"
 
@@ -44,14 +44,14 @@
 ---@alias DetachDomainParams {DomainName: string}
 ---@alias EmitEventParams string
 ---@alias ExtendSelectionToMouseCursorParams "Cell" | "Word" | "Line"
----@alias InputSelectorParams {title:string, choices:Choice[], action:function, fuzzy:boolean, alphabet:string, description:string, fuzzy_description:string}
+---@alias InputSelectorParams {title:string, choices:Choice[], action: Action | function, fuzzy?:boolean, alphabet?:string, description?:string, fuzzy_description?:string}
 ---@alias MoveTabParams number
 ---@alias MoveTabRelativeParams number
 ---@alias MultipleParams KeyAssignment[]
 ---@alias PaneSelectParams {mode:PaneSelectMode, alphabet:string, show_pane_ids:boolean}
 ---@alias PasteFromParams "Clipboard" | "PrimarySelection"
----@alias PromptInputLineParams {description:string, action:function}
----@alias QuickSelectArgsParams {patterns:table, alphabet:string, action:function, label:string, scope_lines:number}
+---@alias PromptInputLineParams {description:string, action: Action | function}
+---@alias QuickSelectArgsParams {patterns:table, alphabet:string, action: Action| function, label:string, scope_lines:number}
 ---@alias RotatePanesParams "Clockwise" | "CounterClockwise"
 ---@alias ScrollByLineParams number
 ---@alias ScrollByPageParams number
@@ -71,7 +71,7 @@
 ---@alias SwitchToWorkspaceParams {name:string, spawn: SpawnCommand}
 ---@alias SwitchWorkspaceRelativeParams number
 
----@alias KeyAssignmentAction KeyAssignmentNoParams |  {ActivatePaneByIndex: ActivatePaneByIndexParams} | {ActivatePaneDirection: ActivatePaneDirectionParams} | {ActivateTab: ActivateTabParams} | {ActivateTabRelative: ActivateTabRelativeParams} | {ActivateTabRelativeNoWrap: ActivateTabRelativeNoWrapParams} | {ActivateWindow: ActivateWindowParams} | {ActivateWindowRelative: ActivateWindowRelativeParams} | {ActivateWindowRelativeNoWrap: ActivateWindowRelativeNoWrapParams} | {AdjustPaneSize: AdjustPaneSizeParams} | {AttachDomain: AttachDomainParams} | {CharSelect: CharSelectParams} | {ClearScrollback: ClearScrollbackParams} |  {CloseCurrentPane: CloseCurrentPaneParams} | {CloseCurrentTab: CloseCurrentTabParams} | {CompleteSelection: CompleteSelectionParams} | {CompleteSelectionOrOpenLinkAtMouseCursor: CompleteSelectionOrOpenLinkAtMouseCursorParams} | {Copy: CopyParams} | {CopyTo: CopyToParams} | {DetachDomain: DetachDomainParams} | {EmitEvent: EmitEventParams} | {ExtendSelectionToMouseCursor: ExtendSelectionToMouseCursorParams} | {MoveTab: MoveTabParams} | {MoveTabRelative: MoveTabRelativeParams} | {Multiple: MultipleParams} | {PaneSelect: PaneSelectParams} | {PasteFrom: PasteFromParams} | {PromptInputLine: PromptInputLineParams} | {QuickSelectArgs: QuickSelectArgsParams} | {RotatePanes: RotatePanesParams} | {ScrollByLine: ScrollByLineParams} | {ScrollByPage: ScrollByPageParams} | {ScrollTofrompt: ScrollToPromptParams} | {Search: SearchParams} | {SelectTextAtMouseCursor: SelectTextAtMouseCursorParams} | {SendKey: SendKeyParams} | {SendString: SendStringParams} | {SetWindowLevel: SetWindowLevelParams} | {ShowLauncherArgs: ShowLauncherArgsParams} | {SpawnCommandInNewTab: SpawnCommandInNewTabParams} | {SpawnCommandInNewWindow: SpawnCommandInNewWindowParams} | {SpawnTab: SpawnTabParams} | {SplitHorizontal: SplitHorizontalParams} | {SplitPane: SplitPaneParams} | {SplitVertical: SplitVerticalParams} | {StartWindowDrag: StartWindowDragParams} | {SwitchToWorkspace: SwitchToWorkspaceParams} | {SwitchWorkspaceRelative: SwitchWorkspaceRelativeParams} | {ToggleFullScreen: ToggleFullScreenParams} | {TogglePaneZoomState: TogglePaneZoomStateParams}
+---@alias KeyAssignmentAction KeyAssignmentNoParams |  {ActivateKeyTable: ActivateKeyTableParams} | {ActivatePaneByIndex: ActivatePaneByIndexParams} | {ActivatePaneDirection: ActivatePaneDirectionParams} | {ActivateTab: ActivateTabParams} | {ActivateTabRelative: ActivateTabRelativeParams} | {ActivateTabRelativeNoWrap: ActivateTabRelativeNoWrapParams} | {ActivateWindow: ActivateWindowParams} | {ActivateWindowRelative: ActivateWindowRelativeParams} | {ActivateWindowRelativeNoWrap: ActivateWindowRelativeNoWrapParams} | {AdjustPaneSize: AdjustPaneSizeParams} | {AttachDomain: AttachDomainParams} | {CharSelect: CharSelectParams} | {ClearScrollback: ClearScrollbackParams} |  {CloseCurrentPane: CloseCurrentPaneParams} | {CloseCurrentTab: CloseCurrentTabParams} | {CompleteSelection: CompleteSelectionParams} | {CompleteSelectionOrOpenLinkAtMouseCursor: CompleteSelectionOrOpenLinkAtMouseCursorParams} | {Copy: CopyParams} | {CopyTo: CopyToParams} | {DetachDomain: DetachDomainParams} | {EmitEvent: EmitEventParams} | {ExtendSelectionToMouseCursor: ExtendSelectionToMouseCursorParams} | {InputSelector: InputSelectorParams} | {MoveTab: MoveTabParams} | {MoveTabRelative: MoveTabRelativeParams} | {Multiple: MultipleParams} | {PaneSelect: PaneSelectParams} | {PasteFrom: PasteFromParams} | {PromptInputLine: PromptInputLineParams} | {QuickSelectArgs: QuickSelectArgsParams} | {RotatePanes: RotatePanesParams} | {ScrollByLine: ScrollByLineParams} | {ScrollByPage: ScrollByPageParams} | {ScrollTofrompt: ScrollToPromptParams} | {Search: SearchParams} | {SelectTextAtMouseCursor: SelectTextAtMouseCursorParams} | {SendKey: SendKeyParams} | {SendString: SendStringParams} | {SetWindowLevel: SetWindowLevelParams} | {ShowLauncherArgs: ShowLauncherArgsParams} | {SpawnCommandInNewTab: SpawnCommandInNewTabParams} | {SpawnCommandInNewWindow: SpawnCommandInNewWindowParams} | {SpawnTab: SpawnTabParams} | {SplitHorizontal: SplitHorizontalParams} | {SplitPane: SplitPaneParams} | {SplitVertical: SplitVerticalParams} | {SwitchToWorkspace: SwitchToWorkspaceParams} | {SwitchWorkspaceRelative: SwitchWorkspaceRelativeParams}
 
 ---@class Action can also be called as function like older versions of wezterm did
 local Action = {}
