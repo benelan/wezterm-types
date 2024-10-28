@@ -187,6 +187,10 @@
 --     -- If true, show_tab_index_in_tab_bar uses a zero-based index.
 --     -- The default is false and the tab shows a one-based index.
 ---@field tab_max_width usize
+--     -- If set to true, launching a new instance of wezterm will prefer to 
+--     -- spawn a new tab when it is able to connect to your already-running 
+--     -- GUI instance. Otherwise, it will spawn a new window.
+---@field prefer_to_spawn_tabs bool
 --     -- Specifies the maximum width that a tab can have in the
 --     -- tab bar.  Defaults to 16 glyphs in width.
 ---@field hide_tab_bar_if_only_one_tab bool
