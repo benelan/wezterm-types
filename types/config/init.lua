@@ -1,12 +1,5 @@
 ---@meta
 
----@alias WindowCloseConfirmation  "AlwaysPrompt" | "NeverPrompt"
-
----@class DaemonOptions
----@field stdout string
----@field stderr string
----@field pid_file string
-
 ---@class Config
 ---@field font FontAttributes | Fonts The baseline font to use
 ---@field font_size f64
@@ -194,8 +187,8 @@
 --     -- If true, show_tab_index_in_tab_bar uses a zero-based index.
 --     -- The default is false and the tab shows a one-based index.
 ---@field tab_max_width usize
---     -- If set to true, launching a new instance of wezterm will prefer to 
---     -- spawn a new tab when it is able to connect to your already-running 
+--     -- If set to true, launching a new instance of wezterm will prefer to
+--     -- spawn a new tab when it is able to connect to your already-running
 --     -- GUI instance. Otherwise, it will spawn a new window.
 ---@field prefer_to_spawn_tabs bool
 --     -- Specifies the maximum width that a tab can have in the
@@ -290,7 +283,7 @@
 ---@field cursor_blink_ease_out EasingFunction
 ---@field animation_fps u8
 ---@field force_reverse_video_cursor bool
----@field default_cursor_style DefaultCursorStyle
+---@field default_cursor_style CursorStyle
 --     -- Specifies the default cursor style.  various escape sequences
 --     -- can override the default style in different situations (eg:
 --     -- an editor can change it depending on the mode), but this value
@@ -331,7 +324,7 @@
 --     -- to the terminal.
 ---@field use_ime bool
 ---@field xim_im_name String
----@field ime_preedit_rendering ImePreeditRendering
+---@field ime_preedit_rendering "Builtin" | "System" Control IME preedit rendering. IME preedit is an area that is used to display the string being preedited in IME.
 ---@field use_dead_keys bool
 ---@field launch_menu SpawnCommand[]
 ---@field use_box_model_render bool
@@ -346,7 +339,7 @@
 --     -- in http://www.leonerd.org.uk/hacks/fixterms/
 --     -- This is off by default because @wez and @jsgf find the shift-space
 --     -- mapping annoying in vim :-p
----@field window_close_confirmation WindowCloseConfirmation
+---@field window_close_confirmation WindowCloseConfirmation Whether to display a confirmation prompt when the window is closed by the windowing environment, either because the user closed it with the window decorations, or instructed their window manager to close it. Set this to "NeverPrompt" if you don't like confirming closing windows every time.
 ---@field native_macos_fullscreen_mode bool
 ---@field selection_word_boundary String
 ---@field enq_answerback String
@@ -368,7 +361,7 @@
 ---@field swallow_mouse_click_on_window_focus bool
 ---@field pane_focus_follows_mouse bool
 ---@field unzoom_on_switch_pane bool
----@field max_fps u8
+---@field max_fps u8 Limits the maximum number of frames per second that wezterm will attempt to draw.
 ---@field shape_cache_size usize
 ---@field line_state_cache_size usize
 ---@field line_quad_cache_size usize
@@ -386,7 +379,7 @@
 ---@field default_workspace String
 ---@field xcursor_theme String
 ---@field xcursor_size u32
----@field key_map_preference KeyMapPreference
+---@field key_map_preference "Mapped" | "Physical" Controls how keys without an explicit phys: or mapped: prefix are treated.
 ---@field quote_dropped_files DroppedFileQuoting
 ---@field ui_key_cap_rendering UIKeyCapRendering
 ---@field palette_max_key_assigments_for_action usize

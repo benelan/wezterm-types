@@ -1,3 +1,5 @@
+---@meta
+
 ---@class TlsDomainClient
 ---@field name String
 -- The name of this specific domain.  Must be unique amongst

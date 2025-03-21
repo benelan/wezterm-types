@@ -1,5 +1,5 @@
 ---@meta
---
+
 ---@class SSHDomainObj
 ---@field name string The name of this specific domain.  Must be unique amongst all types of domain in the configuration file.
 ---@field remote_address string Identifies the host:port pair of the remote server. Can be a DNS name or an IP address with an optional ":port" on the end.

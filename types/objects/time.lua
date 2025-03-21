@@ -1,3 +1,5 @@
+---@meta
+
 ---@class TimeObj
 ---@field format fun(self: TimeObj, format: string): string Formats the time object as a string, using the local date/time representation of the time.
 ---@field format_utc fun(self: TimeObj, format: string): string Formats the time object as a string, using the UTC date/time representation of the time.

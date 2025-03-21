@@ -1,3 +1,5 @@
+---@meta
+
 ---@class TlsDomainServer
 ---@field bind_address String
 -- The address:port combination on which the server will listen

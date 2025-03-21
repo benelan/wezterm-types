@@ -1,3 +1,5 @@
+---@meta
+
 ---@class NerdFont
 local nerdfonts = {}
 nerdfonts.cod_account = ""

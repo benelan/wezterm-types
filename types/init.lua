@@ -41,6 +41,24 @@
 ---| "Disabled"
 ---| "SystemBeep"
 
+---@class VisualBell
+---@field fade_in_function? EasingFunction | CubicFunction
+---@field fade_out_function? EasingFunction | CubicFunction
+---@field fade_in_duration_ms? integer
+---@field fade_out_duration_ms? integer
+---@field target? "BackgroundColor" | "CursorColor"
+
+---@alias EaseInFunction
+---| "Linear"
+---| "Ease"
+---| "EaseIn"
+---| "EaseInOut"
+---| "EaseOut"
+---| "Constant"
+
+---@class CubicFunction
+---@field CubicBezier integer[]
+
 ---@alias WindowCloseConfirmation
 ---| "NeverPrompt"
 ---| "AlwaysPrompt"
@@ -136,6 +154,8 @@
 ---@field inactive_tab_edge string
 ---@field inactive_tab_edge_hover string
 
+---@alias HexColor string A color in the form "#RRGGBB" or "#RRGGBBAA" where the AA component is optional and defaults to "FF" if not specified.
+
 ---@alias AnsiColors "Black" | "Maroon" | "Green" | "Olive" | "Navy" | "Purple" | "Teal" | "Silver" | "Grey" | "Red" | "Lime" | "Yellow" | "Blue" | "Fuchsia" | "Aqua" | "White"
 
 ---@alias AC "AnsiColor"
@@ -144,29 +164,34 @@
 
 ---@alias ColorSpec table<AC, AnsiColors> | table<CO, string>
 
+---@class HsbTransform
+---@field hue number
+---@field saturation number
+---@field brightness number
+
 ---@class Palette
----@field foreground string The text color to use when the attributes are reset to default
----@field background string  The background color to use when the attributes are reset to default
----@field cursor_fg string  The color of the cursor
----@field cursor_bg string  The color of the cursor
----@field cursor_border string  The color of the cursor
----@field selection_fg string  The color of selected text
----@field selection_bg string  The color of selected text
----@field ansi string[]  A list of 8 colors corresponding to the basic ANSI palette
----@field brights string[] A list of 8 colors corresponding to bright versions of the
----@field indexed { [number]: string } A map for setting arbitrary colors ranging from 16 to 256 in the color palette
----@field scrollbar_thumb string The color of the "thumb" of the scrollbar; the segment that represents the current viewable area
----@field split string The color of the split line between panes
----@field visual_bell string The color of the visual bell. If unspecified, the foreground color is used instead.
----@field compose_cursor string The color to use for the cursor when a dead key or leader state is active
----@field copy_mode_active_highlight_fg ColorSpec
----@field copy_mode_active_highlight_bg ColorSpec
----@field copy_mode_inactive_highlight_fg ColorSpec
----@field copy_mode_inactive_highlight_bg ColorSpec
----@field quick_select_label_fg ColorSpec
----@field quick_select_label_bg ColorSpec
----@field quick_select_match_fg ColorSpec
----@field quick_select_match_bg ColorSpec
+---@field foreground? string The text color to use when the attributes are reset to default
+---@field background? string  The background color to use when the attributes are reset to default
+---@field cursor_fg? string  The color of the cursor
+---@field cursor_bg? string  The color of the cursor
+---@field cursor_border? string  The color of the cursor
+---@field selection_fg? string  The color of selected text
+---@field selection_bg? string  The color of selected text
+---@field ansi? string[]  A list of 8 colors corresponding to the basic ANSI palette
+---@field brights? string[] A list of 8 colors corresponding to bright versions of the
+---@field indexed? { [number]: string } A map for setting arbitrary colors ranging from 16 to 256 in the color palette
+---@field scrollbar_thumb? string The color of the "thumb" of the scrollbar; the segment that represents the current viewable area
+---@field split? string The color of the split line between panes
+---@field visual_bell? string The color of the visual bell. If unspecified, the foreground color is used instead.
+---@field compose_cursor? string The color to use for the cursor when a dead key or leader state is active
+---@field copy_mode_active_highlight_fg? ColorSpec
+---@field copy_mode_active_highlight_bg? ColorSpec
+---@field copy_mode_inactive_highlight_fg? ColorSpec
+---@field copy_mode_inactive_highlight_bg? ColorSpec
+---@field quick_select_label_fg? ColorSpec
+---@field quick_select_label_bg? ColorSpec
+---@field quick_select_match_fg? ColorSpec
+---@field quick_select_match_bg? ColorSpec
 local Palette = {
 	---@class TabBar :TabBarColors
 	--  Configure the color and styling for the tab bar
@@ -247,11 +272,11 @@ local Palette = {
 ---@alias Fonts {font: FontAttributes[]}
 
 ---@class FontAttributes
----@field is_fallback boolean
----@field is_synthetic boolean
----@field harfbuzz_features string[]
----@field assume_emoji_presentation boolean
----@field scale number
+---@field is_fallback? boolean
+---@field is_synthetic? boolean
+---@field harfbuzz_features? string[]
+---@field assume_emoji_presentation? boolean
+---@field scale? number
 local FontAttributes = {
 	-- The font family name
 	family = "JetBrains Mono",
@@ -292,6 +317,12 @@ local FontAttributes = {
 ---@field border_top_color RgbaColor
 ---@field border_bottom_color RgbaColor
 
+---@class WindowPadding
+---@field left number | string The number of cells of padding on the left side of the window. You may express padding using a number of different units by specifying a string value with a unit suffix, for example `1px`, `1cell` or `1%`.
+---@field right number | string The number of cells of padding on the right side of the window. You may express padding using a number of different units by specifying a string value with a unit suffix, for example `1px`, `1cell` or `1%`.
+---@field top number | string The number of cells of padding on the top side of the window. You may express padding using a number of different units by specifying a string value with a unit suffix, for example `1px`, `1cell` or `1%`.
+---@field bottom number | string The number of cells of padding on the bottom side of the window. You may express padding using a number of different units by specifying a string value with a unit suffix, for example `1px`, `1cell` or `1%`.
+
 ---@class TabBarStyle
 ---@field new_tab String
 ---@field new_tab_hover String
@@ -301,6 +332,34 @@ local FontAttributes = {
 ---@field window_maximize_hover String
 ---@field window_close String
 ---@field window_close_hover String
+
+---@class FileSource
+---@field File string Load the specified image file. PNG, JPEG, GIF, BMP, ICO, TIFF, PNM, DDS, TGA and farbfeld files can be loaded. Animated GIF and PNG files will animate while the window has focus.
+
+---@class FileSourceWithPath
+---@field File {path: string, speed: number} Load the specified image file, which is an animated gif, and adjust the animation speed to x times its normal speed.
+
+---@class ColorSource
+---@field Color {Color: AnsiColor | HexColor} Generate an image with the specified color.
+
+---@class GradientSource
+---@field Gradient Gradient Generate a gradient
+
+---@class BackgroundLayer
+---@field source FileSource | FileSourceWithPath | GradientSource | ColorSource Defines the source of the layer texture data.
+---@field attachment "Fixed" | "Scroll" | {Parallax: number} Controls whether the layer is fixed to the viewport or moves as it scrolls.
+---@field repeat_x "Repeat" | "Mirror" | "NoRepeat" Controls whether the image is repeated in the x-direction.
+---@field repeat_y "Repeat" | "Mirror" | "NoRepeat" Controls whether the image is repeated in the y-direction.
+---@field repeat_x_size number | string Normally, when repeating, the image is tiled based on its width such that each copy of the image is immediately adjacent to the preceding instance. You may set `repeat_x_size` to a different value to increase or decrease the space between the repeated instances.
+---@field repeat_y_size number | string Normally, when repeating, the image is tiled based on its width such that each copy of the image is immediately adjacent to the preceding instance. You may set `repeat_y_size` to a different value to increase or decrease the space between the repeated instances.
+---@field vertical_align "Top" | "Middle" | "Bottom" Controls the initial vertical position of the layer, relative to the viewport.
+---@field horizontal_align "Left" | "Center" | "Right" Controls the initial horizontal position of the layer, relative to the viewport.
+---@field vertical_offset number | string Specify an offset from the initial vertical position.
+---@field horizontal_offset number | string Specify an offset from the initial horizontal position.
+---@field opacity number A  number in the range `0` through `1.0` inclusive that is multiplied with the alpha channel of the source to adjust the opacity of the layer. The default is `1.0` to use the source alpha channel as-is. Using a smaller value makes the layer less opaque/more transparent.
+---@field hsb HsbTransform A  hue, saturation, brightness transformation that can be used to adjust those attributes of the layer.
+---@field height "Cover" | "Contain" | number | string Controls the height of the image.
+---@field width "Cover" | "Contain" | number | string Controls the width of the image.
 
 ---@class HyperlinkRule
 ---@field regex Regex
@@ -321,8 +380,8 @@ local FontAttributes = {
 
 ---@class GpuInfo
 ---@field name String
----@field device_type String
----@field backend String
+---@field device_type "DiscreteGpu" | "IntegratedGpu" | "Cpu" | "Other"
+---@field backend "Vulkan" | "Gl"
 ---@field driver String
 ---@field driver_info String
 ---@field vendor u32
@@ -360,8 +419,13 @@ local FontAttributes = {
 ---@field overlay_lag_indicator bool
 -- Show time since last response when waiting for a response. It is recommended to use <https://wezfurlong.org/wezterm/config/lua/pane/get_metadata.html#since_last_response_ms> instead.
 
+---@class DaemonOptions
+---@field pid_file string Specify the location of the pid and lock file. The default location is `$XDG_RUNTIME_DIR/wezterm/pid` on X11/Wayland systems, or `$HOME/.local/share/wezterm/pid`.
+---@field stdout string Specifies where a log of the stdout stream from the daemon will be placed. The default is `$XDG_RUNTIME_DIR/wezterm/stdout` on X11/Wayland systems, or `$HOME/.local/share/wezterm/stdout`.
+---@field stderr string Specifies where a log of the stderr stream from the daemon will be placed. The default is `$XDG_RUNTIME_DIR/wezterm/stderr` on X11/Wayland systems, or `$HOME/.local/share/wezterm/stderr`.
+
 ---@class LeaderKey :KeyNoAction
----@field timeout_milliseconds u64
+---@field timeout_milliseconds? u64 - `leader` stays active until a keypress is registered (whether it matches a key binding or not), or until it has been active for the duration specified by `timeout_milliseconds`, at which point it will automatically cancel itself.
 
 ---@class HyperLinkRule
 ---@field regex string The regular expression to match
@@ -378,7 +442,17 @@ local FontAttributes = {
 ---@field state "Charging" | "Discharging" | "Empty" | "Full" | "Unknown"
 
 ---@class WeztermPlugin
----@field require fun(url: string): any
+---@field require fun(url: string): Plugin Takes a plugin repo URL (string). This plugin has to return a `apply_to_config` function that accepts at least a config builder parameter
+---@field list fun(): PluginInformation[]  Returns an array of PluginInformation objects
+---@field update_all fun(): nil            Updates all required plugins
+
+---@class Plugin
+---@field apply_to_config fun(config: Config, ...: any): any Function that accepts at least a config builder parameter, but may pass other parameters, or a lua table with a `config` field that maps to a config build parameter.
+
+---@class PluginInformation Represents the RepoSpec struct in Lua
+---@field url string The URL of the plugin repository
+---@field component string The component or directory name of the plugin
+---@field plugin_dir string The path to the plugin's directory
 
 ---@class AugmentCommandPaletteReturn
 ---@field brief string The brief description for the entry
@@ -457,7 +531,7 @@ local FontAttributes = {
 ---@field y number
 ---@field height number
 ---@field width number
----@field max_fps? number
+---@field max_fps number Limits the maximum number of frames per second that wezterm will attempt to draw.
 
 ---@class KeyBindingBase
 ---@field key string
@@ -489,3 +563,24 @@ local FontAttributes = {
 
 ---@class MouseBinding: MouseBindingBase
 ---@field mods string
+
+---@alias UIKeyCapRendering
+---| "UnixLong" - `Super`, `Meta`, `Ctrl`, `Shift`
+---| "Emacs" - `Super`, `M`, `C`, `S`
+---| "AppleSymbols" - Use macOS style symbols for Command, Option and so on.
+---| "WindowsLong" - `Win`, `Alt`, `Ctrl`, `Shift`
+---| "WindowsSymbols" - Like `WindowsLong` but using a logo for the Win key.
+
+---@alias SystemBackdrop
+---| "Auto" the system chooses. In practice, this is the same as "Disable". This is the default value.
+---| "Disable" disable backdrop effects.
+---| "Acrylic" enable the Acrylic blur-behind-window effect. Available on Windows 10 and 11.
+---| "Mica" enable the Mica effect, available on Windows 11 build 22621 and later.
+---| "Tabbed" enable the Tabbed effect, available on Windows 11 build 22621 and later.
+
+---@alias DroppedFileQuoting
+---| "None" No quoting is performed, the file name is passed through as-is.
+---| "SpacesOnly" Backslash-escape only spaces, leaving all other characters as-is. This is the default for non-Windows platforms.
+---| "Posix" Use POSIX style shell word escaping.
+---| "Windows" Use Windows style shell word escaping: double-quote filename with space characters in it, and leaving others as-is. This is the default on Windows.
+---| "WindowsAlwaysQuoted" Like "Windows", while always double-quote the filename.

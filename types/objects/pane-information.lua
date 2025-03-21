@@ -1,17 +1,20 @@
 ---@meta
 
 ---@class PaneInformation
----@field public pane_id number
----@field public pane_index number
----@field public is_active boolean
----@field public is_zoomed boolean
----@field public left number
----@field public top number
----@field public width number
----@field public height number
----@field public pixel_width number
----@field public pixel_height number
----@field public title string
----@field public user_vars table<string, string>
----@field public foreground_process_name string|nil
----@field public current_working_dir Url
+---@field public pane_id number The pane idenfitier number.
+---@field public pane_index number The logical position of the pane within its containing layout.
+---@field public is_active boolean Is true if the pane is the active pane within its containing tab.
+---@field public is_zoomed boolean Is true if the pane is in the zoomed state.
+---@field public left number The cell x coordinate of the left edge of the pane.
+---@field public top number The cell y coordinate of the top edge of the pane.
+---@field public width number The width of the pane in cells.
+---@field public height number The height of the pane in cells.
+---@field public pixel_width number The width of the pane in pixels.
+---@field public pixel_height number The height of the pane in pixels.
+---@field public title string The title of the pane, per `pane:get_title()` at the time the pane information was captured.
+---@field public user_vars table<string, string> The user variables defined for the pane, per `pane:get_user_vars()` at the time the pane information was captured.
+---@field public foreground_process_name string | nil The path to the executable image per `pane:get_foreground_process_name()`, or an empty string if unavailable.
+---@field public current_working_dir Url The current working directory, per `pane:get_current_working_dir()`.
+---@field public has_unseen_output boolean Is true if the there has been output in the pane since the last time it was focused.
+---@field public domain_name string The name of the domain with which the pane is associated.
+---@field public tty_name string The tty name with the same constraints as described in `pane:get_tty_name()`.
