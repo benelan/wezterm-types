@@ -2,7 +2,7 @@
 
 ---@class PaneSplitParams
 ---@field public args table<string>
----@field public cwd string
+---@field public cwd string|nil
 ---@field public set_environment_variables table<string, string>
 ---@field public domain string|table<string, string>
 ---@field public direction "Right"|"Left"|"Top"|"Bottom"

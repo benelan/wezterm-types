@@ -1,7 +1,14 @@
 ---@meta
 
+---@alias WindowCloseConfirmation  "AlwaysPrompt" | "NeverPrompt"
+
+---@class DaemonOptions
+---@field stdout string
+---@field stderr string
+---@field pid_file string
+
 ---@class Config
----@field font FontAttributes The baseline font to use
+---@field font FontAttributes | Fonts The baseline font to use
 ---@field font_size f64
 ---@field allow_square_glyphs_to_overflow_width "Allow" | "Never" | "WhenFollowedBySpace"
 ---@field dpi_by_screen { [string]: f64 }
@@ -126,7 +133,7 @@
 ---@field serial_ports SerialDomain[]
 ---@field unix_domains UnixDomain[]
 --     -- The set of unix domains
----@field ssh_domains SshDomain[]
+---@field ssh_domains SSHDomainObj[]
 ---@field ssh_backend SshBackend
 ---@field tls_servers TlsDomainServer[]
 --     -- When running in server mode, defines configuration for

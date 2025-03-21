@@ -244,7 +244,7 @@ local Palette = {
 
 --TODO: = add harfbuzz_features enum
 --
----@alias Fonts {fonts: FontAttributes[]}
+---@alias Fonts {font: FontAttributes[]}
 
 ---@class FontAttributes
 ---@field is_fallback boolean
